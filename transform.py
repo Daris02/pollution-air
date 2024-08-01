@@ -2,6 +2,7 @@ import os
 import json
 import requests
 import pandas as pd
+from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -34,6 +35,7 @@ def transform_data(**context):
 
     pollution_data.drop(columns='lat', axis=1, inplace=True)
     pollution_data.drop(columns='lon', axis=1, inplace=True)
+    pollution_data['date'] = datetime.now().date()
 
     ti.xcom_push(key='transform_data_pollution', value=pollution_data)
 
