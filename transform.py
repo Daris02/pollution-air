@@ -36,6 +36,7 @@ def transform_data(**context):
     pollution_data.drop(columns='lat', axis=1, inplace=True)
     pollution_data.drop(columns='lon', axis=1, inplace=True)
     pollution_data['date'] = datetime.now().date()
+    pollution_data.set_index('Location', inplace=True)
 
     ti.xcom_push(key='transform_data_pollution', value=pollution_data)
 
